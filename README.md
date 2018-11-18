@@ -1,3 +1,3 @@
-# base-cucumber-java8-project
-A template to be used when setting up a new Cucumber for Java 8 project.
 # prime-number-site-cucumber-jvm
+
+An example of using the Page Object Model in Cucumber JVM.
