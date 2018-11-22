@@ -1,6 +1,6 @@
 Feature: Prime Number Page
 
-  A page that allows you to check if a number if prime or not.
+  A page that allows you to check if a number is prime or not.
   http://www.math.com/students/calculators/source/prime-number.htm
 
   Background:
