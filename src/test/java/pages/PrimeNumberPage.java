@@ -35,6 +35,10 @@ public class PrimeNumberPage {
         driver.findElement(enterANumberTextField).sendKeys(value);
     }
 
+    public String getTextFromEnterANumberTextField() {
+        return driver.findElement(enterANumberTextField).getAttribute(VALUE);
+    }
+
     public void clickIsItPrimeButton() {
         driver.findElement(isItPrimeButton).sendKeys(Keys.RETURN);
     }

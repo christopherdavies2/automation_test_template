@@ -9,4 +9,4 @@ import org.junit.runner.RunWith;
         glue = { "steps" },
         snippets = SnippetType.CAMELCASE,
         plugin = {"pretty", "html:target/cucumber-reports/html"})
-public class RunTests {}
+public class RunTest {}
