@@ -4,16 +4,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.PrimeNumberPage;
-import support.DriverSupport;
-import support.RetrySupport;
-
-import java.util.function.BooleanSupplier;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class PrimeNumberPageSteps {
-    private PrimeNumberPage primeNumberPage = new PrimeNumberPage(DriverSupport.getDriver());
+public class PrimeNumberPageSteps extends BasePageSteps {
+    private PrimeNumberPage primeNumberPage = new PrimeNumberPage(driver);
 
     @Given("^I am on the Prime Number page$")
     public void iAmOnThePrimeNumberPage() {
