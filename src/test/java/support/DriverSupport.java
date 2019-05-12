@@ -2,6 +2,7 @@ package support;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,30 +17,37 @@ public class DriverSupport {
     private static final String WINDOWS_DRIVER_PATH = "windows_driver_path";
     private static final String LINUX_DRIVER_PATH = "linux_driver_path";
     private static final String DEFAULT_DRIVER_PATH = LINUX_DRIVER_PATH;
-
-    private static PropertiesSupport properties = new PropertiesSupport();
-    private static String webDriver = properties.getValueFromFile(CONFIG_PROPERTIES, DRIVER);
     private static WebDriver driver;
 
-    private DriverSupport() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
+    private PropertiesSupport props = new PropertiesSupport();
+    private String webDriver = props.getValueFromFile(CONFIG_PROPERTIES, DRIVER);
 
-    public static WebDriver getDriver() {
+    public WebDriver getDriver() {
         if (driver == null) {
             System.setProperty(webDriver, getDriverPath());
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(getChromeOptions());
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
 
         return driver;
     }
 
-    private static String getDriverPath() {
+    private String getDriverPath() {
         return getWebDriversPath() + getOSSpecificDriverPath();
     }
 
-    private static String getOSSpecificDriverPath() {
-        String path = "";
+    private ChromeOptions getChromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-infobars");
+        return options;
+    }
+
+    private String getWebDriversPath() {
+        return props.getValueFromFile(CONFIG_PROPERTIES, WEB_DRIVER_PATH);
+    }
+
+    private String getOSSpecificDriverPath() {
+        String path;
 
         if (System.getProperty(OS_NAME).startsWith(WINDOWS)) {
             path = WINDOWS_DRIVER_PATH;
@@ -51,11 +59,7 @@ public class DriverSupport {
             path = DEFAULT_DRIVER_PATH;
         }
 
-        return properties.getValueFromFile(CONFIG_PROPERTIES, path);
-    }
-
-    private static String getWebDriversPath() {
-        return properties.getValueFromFile(CONFIG_PROPERTIES, WEB_DRIVER_PATH);
+        return props.getValueFromFile(CONFIG_PROPERTIES, path);
     }
 
     private static final Thread CLOSE_THREAD = new Thread() {

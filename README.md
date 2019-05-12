@@ -1,3 +1,14 @@
-# prime-number-site-cucumber-jvm
+# Front End Testing Template
 
-An example of using the Page Object Model in Cucumber JVM.
+A template for front end testing using Cucumber JVM.
+
+# Run Tests
+
+In your IDE run the file 'DefaultRunner.java'.
+
+# Run Tests in Parallel
+
+Using a command line tool, navigate to the root directory then run the command 'mvn clean install'.
+This will run 4 runners in parallel.  Details of the parallel execution can be found in the 'pom.xml' file. 
+
+

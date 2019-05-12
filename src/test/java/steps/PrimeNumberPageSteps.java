@@ -4,16 +4,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.PrimeNumberPage;
-import support.RetrySupport;
-
-import java.util.function.BooleanSupplier;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class PrimeNumberPageSteps {
-    private PrimeNumberPage primeNumberPage = new PrimeNumberPage();
-    private RetrySupport rs = new RetrySupport();
+public class PrimeNumberPageSteps extends BasePageSteps {
+    private PrimeNumberPage primeNumberPage = new PrimeNumberPage(driver);
 
     @Given("^I am on the Prime Number page$")
     public void iAmOnThePrimeNumberPage() {
@@ -22,9 +18,7 @@ public class PrimeNumberPageSteps {
 
     @Given("^I enter the value \"([^\"]*)\"$")
     public void iEnterTheValue(String value) {
-        Runnable action = () -> primeNumberPage.enterANumberTextField(value);
-        BooleanSupplier condition = () -> primeNumberPage.getTextFromEnterANumberTextField().length() > 0;
-        rs.retryUntilConditionOrTimeoutReached(action, condition, "Getting text from text field.");
+        primeNumberPage.enterANumberTextField(value);
     }
 
     @When("^I click \"Is it prime\\?\"$")
