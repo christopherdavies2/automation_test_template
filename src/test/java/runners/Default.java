@@ -1,3 +1,5 @@
+package runners;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
@@ -9,4 +11,5 @@ import org.junit.runner.RunWith;
         glue = { "steps" },
         snippets = SnippetType.CAMELCASE,
         plugin = {"pretty", "html:target/cucumber-reports/html"})
-public class RunTest {}
+public class Default {
+}

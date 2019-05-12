@@ -1,6 +1,14 @@
-# Frontend Testing Template
+# Front End Testing Template
 
-A template for frontend testing using Cucumber JVM.
+A template for front end testing using Cucumber JVM.
 
-To run the tests either 'mvn clean install' in the root directory or
-run the file 'RunTest.java' in your IDE of choice.
+# Run Tests
+
+In your IDE run the file 'DefaultRunner.java'.
+
+# Run Tests in Parallel
+
+Using a command line tool, navigate to the root directory then run the command 'mvn clean install'.
+This will run 4 runners in parallel.  Details of the parallel execution can be found in the 'pom.xml' file. 
+
+
