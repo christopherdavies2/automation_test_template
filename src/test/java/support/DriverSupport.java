@@ -17,18 +17,17 @@ public class DriverSupport {
     private static final String LINUX_DRIVER_PATH = "linux_driver_path";
     private static final String DEFAULT_DRIVER_PATH = LINUX_DRIVER_PATH;
 
-    private static PropertiesSupport properties = new PropertiesSupport();
-    private static String webDriver = properties.getValueFromFile(CONFIG_PROPERTIES, DRIVER);
+    private static PropertiesSupport props = new PropertiesSupport();
+    private static String webDriver = props.getValueFromFile(CONFIG_PROPERTIES, DRIVER);
     private static WebDriver driver;
 
-    private DriverSupport() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
+    private DriverSupport() {}
 
     public static WebDriver getDriver() {
         if (driver == null) {
             System.setProperty(webDriver, getDriverPath());
             driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
 
         return driver;
@@ -39,7 +38,7 @@ public class DriverSupport {
     }
 
     private static String getOSSpecificDriverPath() {
-        String path = "";
+        String path;
 
         if (System.getProperty(OS_NAME).startsWith(WINDOWS)) {
             path = WINDOWS_DRIVER_PATH;
@@ -51,11 +50,11 @@ public class DriverSupport {
             path = DEFAULT_DRIVER_PATH;
         }
 
-        return properties.getValueFromFile(CONFIG_PROPERTIES, path);
+        return props.getValueFromFile(CONFIG_PROPERTIES, path);
     }
 
     private static String getWebDriversPath() {
-        return properties.getValueFromFile(CONFIG_PROPERTIES, WEB_DRIVER_PATH);
+        return props.getValueFromFile(CONFIG_PROPERTIES, WEB_DRIVER_PATH);
     }
 
     private static final Thread CLOSE_THREAD = new Thread() {

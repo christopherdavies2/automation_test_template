@@ -1,3 +1,6 @@
-# prime-number-site-cucumber-jvm
+# Frontend Testing Template
 
-An example of using the Page Object Model in Cucumber JVM.
+A template for frontend testing using Cucumber JVM.
+
+To run the tests either 'mvn clean install' in the root directory or
+run the file 'RunTest.java' in your IDE of choice.
