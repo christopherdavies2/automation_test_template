@@ -2,6 +2,7 @@ package support;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +25,7 @@ public class DriverSupport {
     public WebDriver getDriver() {
         if (driver == null) {
             System.setProperty(webDriver, getDriverPath());
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(getChromeOptions());
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
 
@@ -33,6 +34,12 @@ public class DriverSupport {
 
     private String getDriverPath() {
         return getWebDriversPath() + getOSSpecificDriverPath();
+    }
+
+    private ChromeOptions getChromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-infobars");
+        return options;
     }
 
     private String getWebDriversPath() {
