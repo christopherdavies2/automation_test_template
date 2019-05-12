@@ -8,27 +8,11 @@ import static org.junit.Assert.fail;
 public class RetrySupport {
     private static final Logger LOG = Logger.getLogger(RetrySupport.class);
 
-    private int timeoutMs = 3000;
-    private int pollIntervalMs = 100;
-
-    public void setTimeoutMs(int timeoutMs) {
-        this.timeoutMs = timeoutMs;
-    }
-
-    public int getTimeoutMs() {
-        return timeoutMs;
-    }
-
-    public void setPollIntervalMs(int pollIntervalMs) {
-        this.pollIntervalMs = pollIntervalMs;
-    }
-
-    public int getPollIntervalMs() {
-        return pollIntervalMs;
-    }
-
     public void retryUntilConditionOrTimeout(Runnable action, BooleanSupplier condition, String logMsg) {
         action.run();
+
+        int timeoutMs = 5000;
+        int pollIntervalMs = 100;
 
         while (!condition.getAsBoolean() && timeoutMs > 0) {
             try {
