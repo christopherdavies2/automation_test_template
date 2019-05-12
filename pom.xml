@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>prime-number-site-cucumber-jvm</groupId>
-    <artifactId>prime-number-site-cucumber-jvm</artifactId>
+    <groupId>front_end_testing_template</groupId>
+    <artifactId>front_end_testing_template</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
