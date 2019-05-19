@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.concurrent.TimeUnit;
 
 public class DriverSupport {
-    private static final String CONFIG_PROPERTIES = "config.properties";
+    private static final String CONFIG_PROPERTIES = "common.properties";
     private static final String DRIVER = "driver";
     private static final String OS_NAME = "os.name";
     private static final String WINDOWS = "Windows";

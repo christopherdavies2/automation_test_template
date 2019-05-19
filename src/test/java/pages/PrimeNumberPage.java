@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PrimeNumberPage extends BasePage {
     private static final String BASE_URI = "base_uri";
-    private static final String CONFIG = "config.properties";
+    private static final String CONFIG = "common.properties";
     private static final String VALUE = "value";
     private static final String PATH = "prime-number.htm";
 
