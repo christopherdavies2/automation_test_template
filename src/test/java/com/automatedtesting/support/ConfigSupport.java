@@ -1,9 +1,10 @@
-package com.automatedtesting.configuration;
+package com.automatedtesting.support;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("application.properties")
+@PropertySource("default.properties")
+@PropertySource("${environment}.properties")
 @ComponentScan("com.automatedtesting")
-public class Config {
+public class ConfigSupport {
 }
