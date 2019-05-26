@@ -4,9 +4,7 @@ import com.automatedtesting.pages.PrimeNumberPage;
 import cucumber.api.java8.En;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrimeNumberPageSteps implements En {
     private final PrimeNumberPage primeNumberPage;
@@ -29,7 +27,7 @@ public class PrimeNumberPageSteps implements En {
         );
 
         Then("^the message \"([^\"]*)\" appears$", (String expectedText) ->
-          assertThat(primeNumberPage.getTextFromIsItPrimeTextField(), is(expectedText))
+          assertThat(primeNumberPage.getTextFromIsItPrimeTextField()).isEqualTo(expectedText)
         );
     }
 }
