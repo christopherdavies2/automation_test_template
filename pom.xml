@@ -17,6 +17,7 @@
         <springframework.version>5.1.7.RELEASE</springframework.version>
         <springboot.version>2.1.5.RELEASE</springboot.version>
         <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     </properties>
 
     <dependencies>
@@ -86,6 +87,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -118,14 +120,14 @@
 
                             <!-- UNCOMMENT BELOW 3 LINES - To execute using parallel or combination
                                 option -->
-                            <!--<parallel>classes</parallel>
+                            <parallel>classes</parallel>
                             <threadCount>4</threadCount>
-                            <perCoreThreadCount>false</perCoreThreadCount>-->
+                            <perCoreThreadCount>false</perCoreThreadCount>
 
                             <!-- UNCOMMENT BELOW 3 LINES - To execute using forking or combination
                                 option -->
-                            <forkCount>4</forkCount>
-                            <reuseForks>true</reuseForks>
+                            <!--<forkCount>4</forkCount>-->
+                            <!--<reuseForks>true</reuseForks>-->
 
                         </configuration>
                     </execution>
