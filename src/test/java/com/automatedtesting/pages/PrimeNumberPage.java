@@ -1,6 +1,5 @@
 package com.automatedtesting.pages;
 
-import com.automatedtesting.support.BrowserSupport;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PrimeNumberPage {
+    private static final String PAGE_NAME = "prime-number.htm";
     private static final String VALUE = "value";
-    private static final String PATH = "prime-number.htm";
 
     @Value("${uri}")
     private String baseUri;
@@ -36,7 +35,7 @@ public class PrimeNumberPage {
     }
 
     public void goToPage() {
-        driver.get(baseUri + PATH);
+        driver.get(baseUri + PAGE_NAME);
     }
 
     public void enterANumberTextField(String value) {
