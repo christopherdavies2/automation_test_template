@@ -11,6 +11,11 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class BrowserSupport {
+    private static final String OS_NAME = "os.name";
+    private static final String MAC = "Mac";
+    private static final String WINDOWS = "Windows";
+    private static final String DISABLE_INFOBARS = "disable-infobars";
+
     private static WebDriver driver;
 
     @Value("${webdriver.chrome}")
@@ -19,21 +24,34 @@ public class BrowserSupport {
     @Value("${driver.path.windows}")
     private String driverPathWindows;
 
-    @Value("${driver.path")
-    private String driverPath;
+    @Value(("$driver.path.mac"))
+    private String driverPathMac;
 
-    // TODO: have config for Mac
     @Bean
     public WebDriver getDriver() {
-        System.setProperty(webdriverChrome, driverPathWindows);
+        String driverPath = getDriverPath();
+        System.setProperty(webdriverChrome, driverPath);
         driver = new ChromeDriver(getChromeOptions());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver;
     }
 
+    private String getDriverPath() {
+        String driverPath = "";
+
+        if (System.getProperty(OS_NAME).startsWith(MAC)) {
+            driverPath = driverPathMac;
+        }
+        if (System.getProperty(OS_NAME).startsWith(WINDOWS)) {
+            driverPath = driverPathWindows;
+        }
+
+        return driverPath;
+    }
+
     private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("disable-infobars");
+        options.addArguments(DISABLE_INFOBARS);
         return options;
     }
 
