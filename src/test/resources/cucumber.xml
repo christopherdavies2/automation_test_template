@@ -7,6 +7,6 @@
 
     <context:annotation-config/>
 
-    <bean name="Config" class="com.automatedtesting.support.Config"/>
+    <bean name="Config" class="com.automatedtesting.configuration.Config"/>
 
 </beans>

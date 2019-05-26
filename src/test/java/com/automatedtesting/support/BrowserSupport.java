@@ -3,20 +3,31 @@ package com.automatedtesting.support;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
-public class DriverSupport {
-
+@Configuration
+public class BrowserSupport {
     private static WebDriver driver;
 
-    public WebDriver getDriver() {
-        if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/windows/chromedriver");
-            driver = new ChromeDriver(getChromeOptions());
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        }
+    @Value("${webdriver.chrome}")
+    private String webdriverChrome;
 
+    @Value("${driver.path.windows}")
+    private String driverPathWindows;
+
+    @Value("${driver.path")
+    private String driverPath;
+
+    // TODO: have config for Mac
+    @Bean
+    public WebDriver getDriver() {
+        System.setProperty(webdriverChrome, driverPathWindows);
+        driver = new ChromeDriver(getChromeOptions());
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver;
     }
 
