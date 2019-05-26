@@ -16,8 +16,6 @@ public class BrowserSupport {
     private static final String WINDOWS = "Windows";
     private static final String DISABLE_INFOBARS = "disable-infobars";
 
-    private static WebDriver driver;
-
     @Value("${webdriver.chrome}")
     private String webdriverChrome;
 
@@ -27,11 +25,14 @@ public class BrowserSupport {
     @Value(("$driver.path.mac"))
     private String driverPathMac;
 
+    @Value("${browser.headless}")
+    private boolean isHeadless;
+
     @Bean
     public WebDriver getDriver() {
         String driverPath = getDriverPath();
         System.setProperty(webdriverChrome, driverPath);
-        driver = new ChromeDriver(getChromeOptions());
+        WebDriver driver = new ChromeDriver(getChromeOptions());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver;
     }
@@ -52,18 +53,8 @@ public class BrowserSupport {
     private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(DISABLE_INFOBARS);
+        options.setHeadless(isHeadless);
         return options;
-    }
-
-    private static final Thread CLOSE_THREAD = new Thread() {
-        @Override
-        public void run() {
-            driver.close();
-        }
-    };
-
-    static {
-        Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
     }
 
 }

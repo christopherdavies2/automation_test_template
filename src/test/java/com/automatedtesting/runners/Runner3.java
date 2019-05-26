@@ -12,6 +12,5 @@ import org.junit.runner.RunWith;
         glue = {"com.automatedtesting.steps"},
         snippets = SnippetType.CAMELCASE,
         plugin = {"pretty", "html:target/cucumber-reports/html"})
-
 public class Runner3 {
 }
