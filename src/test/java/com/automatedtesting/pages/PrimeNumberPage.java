@@ -14,7 +14,7 @@ public class PrimeNumberPage {
     private static final String PAGE_NAME = "prime-number.htm";
     private static final String VALUE = "value";
 
-    @Value("${uri}")
+    @Value("${base.uri}")
     private String baseUri;
 
     @FindBy(name = "number")
