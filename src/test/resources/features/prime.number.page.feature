@@ -1,6 +1,7 @@
 Feature: Prime Number Page
 
   A page that allows you to check if a number is prime or not.
+  A prime number is a positive integer that has exactly two positive integer factors, 1 and itself.
   http://www.math.com/students/calculators/source/prime-number.htm
 
   Background:
