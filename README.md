@@ -17,7 +17,7 @@ Using a command line tool, navigate to the root directory containing the 'pom.xm
 This will run 4 runners (marked Runner{number}.java) in parallel.  
 Each runner runs a specified tag.  
 These tags can be found above the scenarios in the 'prime.number.page.feature' file.
-Details of the parallel execution can be found in the 'pom.xml' file. 
+Details of running tests in parallel can be found in the 'pom.xml' file. 
 
 # Run Tests for a Specified Environment
 
@@ -30,5 +30,5 @@ Any property value in an '{environment}.properties' file will override its equiv
 # Run Tests for a Specified Browser
 
 In the 'common.properties' file change the value of the 'browser' property to be either 'chrome', 'firefox' or 'edge'.
-You also add a 'browser' property to one of the '{environment}.properties' files to run a specific browser for a particular 
+You can also add a 'browser' property to one of the '{environment}.properties' files to run a specific browser for a particular 
 environment.
