@@ -4,17 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>front_end_testing_template</groupId>
-    <artifactId>front_end_testing_template</artifactId>
+    <groupId>com.automatedtesting</groupId>
+    <artifactId>TestingTemplate</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <junit.version>4.12</junit.version>
         <cucumber.version>4.2.6</cucumber.version>
-        <hamcrest.version>1.3</hamcrest.version>
         <selenium.version>3.11.0</selenium.version>
         <log4j.version>1.2.17</log4j.version>
+        <springframework.version>5.1.7.RELEASE</springframework.version>
+        <springboot.version>2.1.5.RELEASE</springboot.version>
         <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <assertj.version>3.12.2</assertj.version>
     </properties>
 
     <dependencies>
@@ -25,12 +28,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
@@ -38,8 +35,26 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${springframework.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -60,51 +75,66 @@
             <version>${log4j.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
-    <plugins>
-    <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven-failsafe-plugin.version}</version>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>integration-test</goal>
-                </goals>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-
-                    <!-- UNCOMMENT - To add any exclusions if required -->
-                    <!-- <excludes> <exclude>**/*IT*.java</exclude> </excludes> -->
-
-                    <includes>
-
-                        <!-- UNCOMMENT BELOW LINE - To execute feature files with a single
-                            runner -->
-                        <!--<include>**/Default.java</include>-->
-
-                        <!-- UNCOMMENT BELOW LINE - To execute feature files with multiple
-                            runners -->
-                         <include>**/Runner*.java</include>
-                    </includes>
-
-                    <!-- UNCOMMENT BELOW 3 LINES - To execute using parallel or combination
-                        option -->
-                    <!--<parallel>classes</parallel>
-                    <threadCount>4</threadCount>
-                    <perCoreThreadCount>false</perCoreThreadCount>-->
-
-                    <!-- UNCOMMENT BELOW 3 LINES - To execute using forking or combination
-                        option -->
-                    <forkCount>4</forkCount>
-                    <reuseForks>true</reuseForks>
-
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
-            </execution>
-        </executions>
-    </plugin>
-    </plugins>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+
+                            <!-- UNCOMMENT - To add any exclusions if required -->
+                            <!-- <excludes> <exclude>**/*IT*.java</exclude> </excludes> -->
+
+                            <includes>
+
+                                <!-- UNCOMMENT BELOW LINE - To execute feature files with a single
+                                    runner -->
+                                <!--<include>**/Default.java</include>-->
+
+                                <!-- UNCOMMENT BELOW LINE - To execute feature files with multiple
+                                    com.automatedtesting.pages.runners -->
+                                <include>**/Runner*.java</include>
+                            </includes>
+
+                            <!-- UNCOMMENT BELOW 3 LINES - To execute using parallel or combination
+                                option -->
+                            <parallel>classes</parallel>
+                            <threadCount>4</threadCount>
+                            <perCoreThreadCount>false</perCoreThreadCount>
+
+                            <!-- UNCOMMENT BELOW 3 LINES - To execute using forking or combination
+                                option -->
+                            <!--<forkCount>4</forkCount>-->
+                            <!--<reuseForks>true</reuseForks>-->
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
