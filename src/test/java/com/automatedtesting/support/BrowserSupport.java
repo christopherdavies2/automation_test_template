@@ -25,6 +25,7 @@ public class BrowserSupport {
     private static final String FIREFOX = "firefox";
     private static final String EDGE = "edge";
     private static final String BROWSER_NOT_SUPPORTED_MSG = "Browser %s is not supported.";
+    private static final String OS_NOT_SUPPORTED_MSG = "OS %s is not supported.";
 
     @Value("${webdriver.chrome}")
     private String webdriverChrome;
@@ -58,7 +59,7 @@ public class BrowserSupport {
         WebDriver webdriver = null;
 
         try {
-            System.setProperty(getBrowserWebdriverName(), getWebDriverPath());
+            setWebdriverSystemProperties();
             webdriver = getBrowserWebdriver();
             webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         } catch (IllegalStateException ex) {
@@ -66,6 +67,13 @@ public class BrowserSupport {
         }
 
         return webdriver;
+    }
+
+    private void setWebdriverSystemProperties() throws IllegalStateException {
+        // Edge does not require system properties to be set
+        if (!browserName.equalsIgnoreCase(EDGE)) {
+            System.setProperty(getBrowserWebdriverName(), getWebDriverPath());
+        }
     }
 
     private String getWebDriverPath() {
@@ -89,7 +97,7 @@ public class BrowserSupport {
         } else if (OS.startsWith(WINDOWS)) {
             OSPath = WINDOWS;
         } else {
-            throw new IllegalStateException(String.format("OS %s is not supported.", OS));
+            throw new IllegalStateException(String.format(OS_NOT_SUPPORTED_MSG, OS));
         }
 
         return String.format("%s%s/", webdriverBasePath, OSPath);
