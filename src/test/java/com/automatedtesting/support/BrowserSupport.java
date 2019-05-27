@@ -39,12 +39,6 @@ public class BrowserSupport {
     @Value("${webdriver.firefox.filename}")
     private String webdriverFirefoxFilename;
 
-    @Value("${webdriver.edge}")
-    private String webdriverEdge;
-
-    @Value("${webdriver.edge.filename}")
-    private String webdriverEdgeFilename;
-
     @Value("${webdriver.base.path}")
     private String webdriverBasePath;
 
@@ -108,8 +102,6 @@ public class BrowserSupport {
             return webdriverChrome;
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
             return webdriverFirefox;
-        } else if (browserName.equalsIgnoreCase(EDGE)) {
-            return webdriverEdge;
         } else {
             throw new IllegalStateException(String.format(BROWSER_NOT_SUPPORTED_MSG, browserName));
         }
@@ -132,8 +124,6 @@ public class BrowserSupport {
             return webdriverChromeFilename;
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
             return webdriverFirefoxFilename;
-        } else if (browserName.equalsIgnoreCase(EDGE)) {
-            return webdriverEdgeFilename;
         } else {
             throw new IllegalStateException(String.format(BROWSER_NOT_SUPPORTED_MSG, browserName));
         }
