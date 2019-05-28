@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         tags = "@runner4",
-        features = "src/test/resources/features",
+        features = "classpath:features",
         glue = {"com.automatedtesting.steps"},
         snippets = SnippetType.CAMELCASE,
-        plugin = {"pretty", "html:target/cucumber-reports/html"})
+        plugin = {"pretty", "json:target/cucumber-report/runner4.json"})
 public class Runner4 {
 }

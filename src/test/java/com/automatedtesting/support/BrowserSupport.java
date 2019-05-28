@@ -1,5 +1,7 @@
 package com.automatedtesting.support;
 
+import com.automatedtesting.exceptions.BrowserNotSupportedException;
+import com.automatedtesting.exceptions.OperatingSystemNotSupportedException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,8 +26,6 @@ public class BrowserSupport {
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
     private static final String EDGE = "edge";
-    private static final String BROWSER_NOT_SUPPORTED_MSG = "Browser %s is not supported.";
-    private static final String OS_NOT_SUPPORTED_MSG = "OS %s is not supported.";
 
     @Value("${webdriver.chrome}")
     private String webdriverChrome;
@@ -56,33 +56,26 @@ public class BrowserSupport {
             setWebdriverSystemProperties();
             webdriver = getBrowserWebdriver();
             webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        } catch (IllegalStateException ex) {
-            LOG.info(ex.getMessage());
+        } catch (OperatingSystemNotSupportedException | BrowserNotSupportedException ex) {
+            LOG.error(ex.getMessage());
         }
 
         return webdriver;
     }
 
-    private void setWebdriverSystemProperties() throws IllegalStateException {
+    private void setWebdriverSystemProperties()
+            throws BrowserNotSupportedException, OperatingSystemNotSupportedException {
         // Edge does not require system properties to be set
         if (!browserName.equalsIgnoreCase(EDGE)) {
             System.setProperty(getBrowserWebdriverName(), getWebDriverPath());
         }
     }
 
-    private String getWebDriverPath() {
-        String webDriverPath = "";
-
-        try {
-            webDriverPath = getOSWebdriverPath() + getBrowserWebdriverFilename();
-        } catch (Exception ex) {
-            LOG.info(ex.getMessage());
-        }
-
-        return webDriverPath;
+    private String getWebDriverPath() throws OperatingSystemNotSupportedException, BrowserNotSupportedException {
+        return webdriverBasePath + getOSWebdriverPath() + getBrowserWebdriverFilename();
     }
 
-    private String getOSWebdriverPath() throws IllegalStateException {
+    private String getOSWebdriverPath() throws OperatingSystemNotSupportedException {
         String OS = System.getProperty(OS_NAME).toLowerCase();
         String OSPath;
 
@@ -91,23 +84,23 @@ public class BrowserSupport {
         } else if (OS.startsWith(WINDOWS)) {
             OSPath = WINDOWS;
         } else {
-            throw new IllegalStateException(String.format(OS_NOT_SUPPORTED_MSG, OS));
+            throw new OperatingSystemNotSupportedException(OS);
         }
 
-        return String.format("%s%s/", webdriverBasePath, OSPath);
+        return OSPath + "/";
     }
 
-    private String getBrowserWebdriverName() throws IllegalStateException {
+    private String getBrowserWebdriverName() throws BrowserNotSupportedException {
         if (browserName.equalsIgnoreCase(CHROME)) {
             return webdriverChrome;
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
             return webdriverFirefox;
         } else {
-            throw new IllegalStateException(String.format(BROWSER_NOT_SUPPORTED_MSG, browserName));
+            throw new BrowserNotSupportedException(browserName);
         }
     }
 
-    private WebDriver getBrowserWebdriver() throws IllegalStateException {
+    private WebDriver getBrowserWebdriver() throws BrowserNotSupportedException {
         if (browserName.equalsIgnoreCase(CHROME)) {
             return getChromeWebdriver();
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
@@ -115,17 +108,17 @@ public class BrowserSupport {
         } else if (browserName.equalsIgnoreCase(EDGE)) {
             return getEdgeWebdriver();
         } else {
-            throw new IllegalStateException(String.format(BROWSER_NOT_SUPPORTED_MSG, browserName));
+            throw new BrowserNotSupportedException(browserName);
         }
     }
 
-    private String getBrowserWebdriverFilename() throws IllegalStateException {
+    private String getBrowserWebdriverFilename() throws BrowserNotSupportedException {
         if (browserName.equalsIgnoreCase(CHROME)) {
             return webdriverChromeFilename;
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
             return webdriverFirefoxFilename;
         } else {
-            throw new IllegalStateException(String.format(BROWSER_NOT_SUPPORTED_MSG, browserName));
+            throw new BrowserNotSupportedException(browserName);
         }
     }
 

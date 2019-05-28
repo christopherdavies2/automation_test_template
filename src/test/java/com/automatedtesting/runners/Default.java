@@ -7,9 +7,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features",
+        features = "classpath:features",
         glue = {"com.automatedtesting.steps"},
         snippets = SnippetType.CAMELCASE,
-        plugin = {"pretty", "html:target/cucumber-reports/html"})
+        plugin = {"pretty", "json:target/cucumber-report/default.json"})
 public class Default {
 }
