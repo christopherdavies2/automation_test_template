@@ -56,7 +56,7 @@ public class BrowserSupport {
             setWebdriverSystemProperties();
             webdriver = getBrowserWebdriver();
             webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        } catch (OperatingSystemNotSupportedException |BrowserNotSupportedException ex) {
+        } catch (OperatingSystemNotSupportedException|BrowserNotSupportedException ex) {
             LOG.error(ex.getMessage());
         }
 

@@ -32,3 +32,12 @@ Any property value in an '{environment}.properties' file will override its equiv
 In the 'common.properties' file change the value of the 'browser' property to be either 'chrome', 'firefox' or 'edge'.
 You can also add a 'browser' property to one of the '{environment}.properties' files to run a specific browser for a particular 
 environment.
+
+# Reporting
+
+This project uses Cluecumber for reports: https://github.com/trivago/cluecumber-report-plugin.
+Simply run your tests then open 'target/cucumber-report/index.html' in a browser to view the test results report.
+
+# Known Issues
+
+Currently parallel running does not work for the Edge browser.
