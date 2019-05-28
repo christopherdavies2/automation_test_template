@@ -56,14 +56,15 @@ public class BrowserSupport {
             setWebdriverSystemProperties();
             webdriver = getBrowserWebdriver();
             webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        } catch (OperatingSystemNotSupportedException|BrowserNotSupportedException ex) {
+        } catch (OperatingSystemNotSupportedException | BrowserNotSupportedException ex) {
             LOG.error(ex.getMessage());
         }
 
         return webdriver;
     }
 
-    private void setWebdriverSystemProperties() throws BrowserNotSupportedException, OperatingSystemNotSupportedException {
+    private void setWebdriverSystemProperties()
+            throws BrowserNotSupportedException, OperatingSystemNotSupportedException {
         // Edge does not require system properties to be set
         if (!browserName.equalsIgnoreCase(EDGE)) {
             System.setProperty(getBrowserWebdriverName(), getWebDriverPath());
