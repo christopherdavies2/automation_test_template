@@ -1,0 +1,19 @@
+@api
+Feature: Rapid API
+
+  An API that translates text.
+  https://rapidapi.com/systran/api/systran-io-translation-and-nlp?endpoint=568bd090e4b0e203818a59f0
+
+  GET /translation/text/translate?source={source}&target={target}&input={input})
+  The parameters source and target use two-letter language codes defined by the ISO 639-1:2002
+
+  Background:
+    Given I am using the language processing base URI
+
+  Scenario: Get the French translation for an English word
+    When I call GET /translation/text/translate with the parameters:
+      | source | en      |
+      | target | fr      |
+      | input  | testing |
+    Then the response returns:
+      | $.outputs[0].output | essai |
