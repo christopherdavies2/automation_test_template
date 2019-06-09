@@ -11,6 +11,6 @@ import org.junit.runner.RunWith;
         glue = {"com.automatedtesting.steps"},
         snippets = SnippetType.CAMELCASE,
         tags = "@api",
-        plugin = {"pretty", "json:target/cucumber-report/default.json"})
+        plugin = {"pretty", "json:target/cucumber-report/runapitests.json"})
 public class RunAPITests {
 }
