@@ -12,8 +12,10 @@ Feature: Rapid API
 
   Scenario: Get the French translation for an English word
     When I call GET /translation/text/translate with the parameters:
-      | source | en      |
-      | target | fr      |
-      | input  | testing |
-    Then the response returns:
-      | $.outputs[0].output | essai |
+      | source | en    |
+      | target | fr    |
+      | input  | hello |
+    Then the following JSON is in the response body:
+      | $.outputs[0].output              | bonjour |
+      | $.outputs[0].stats.nb_characters | 5       |
+      | $.outputs[0].stats.nb_tokens     | 1       |
