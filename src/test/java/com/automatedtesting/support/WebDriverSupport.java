@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-public class BrowserSupport {
-    private static final Logger LOG = Logger.getLogger(BrowserSupport.class);
+public class WebDriverSupport {
+    private static final Logger LOG = Logger.getLogger(WebDriverSupport.class);
 
     private static final String OS_NAME = "os.name";
     private static final String MAC = "mac";
@@ -27,20 +27,20 @@ public class BrowserSupport {
     private static final String FIREFOX = "firefox";
     private static final String EDGE = "edge";
 
-    @Value("${webdriver.chrome}")
-    private String webdriverChrome;
+    @Value("${web.driver.chrome}")
+    private String webDriverChrome;
 
-    @Value("${webdriver.chrome.filename}")
-    private String webdriverChromeFilename;
+    @Value("${web.driver.chrome.filename}")
+    private String webDriverChromeFilename;
 
-    @Value("${webdriver.firefox}")
-    private String webdriverFirefox;
+    @Value("${web.driver.firefox}")
+    private String webDriverFirefox;
 
-    @Value("${webdriver.firefox.filename}")
-    private String webdriverFirefoxFilename;
+    @Value("${web.driver.firefox.filename}")
+    private String webDriverFirefoxFilename;
 
-    @Value("${webdriver.base.path}")
-    private String webdriverBasePath;
+    @Value("${web.driver.base.path}")
+    private String webDriverBasePath;
 
     @Value("${browser.headless}")
     private boolean isHeadless;
@@ -49,33 +49,33 @@ public class BrowserSupport {
     private String browserName;
 
     @Bean
-    public WebDriver getWebdriver() {
-        WebDriver webdriver = null;
+    public WebDriver getWebDriver() {
+        WebDriver webDriver = null;
 
         try {
-            setWebdriverSystemProperties();
-            webdriver = getBrowserWebdriver();
-            webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            setWebDriverSystemProperties();
+            webDriver = getBrowserWebDriver();
+            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         } catch (OperatingSystemNotSupportedException | BrowserNotSupportedException ex) {
             LOG.error(ex.getMessage());
         }
 
-        return webdriver;
+        return webDriver;
     }
 
-    private void setWebdriverSystemProperties()
+    private void setWebDriverSystemProperties()
             throws BrowserNotSupportedException, OperatingSystemNotSupportedException {
         // Edge does not require system properties to be set
         if (!browserName.equalsIgnoreCase(EDGE)) {
-            System.setProperty(getBrowserWebdriverName(), getWebDriverPath());
+            System.setProperty(getBrowserWebDriverName(), getWebDriverPath());
         }
     }
 
     private String getWebDriverPath() throws OperatingSystemNotSupportedException, BrowserNotSupportedException {
-        return webdriverBasePath + getOSWebdriverPath() + getBrowserWebdriverFilename();
+        return webDriverBasePath + getOSWebDriverPath() + getBrowserWebDriverFilename();
     }
 
-    private String getOSWebdriverPath() throws OperatingSystemNotSupportedException {
+    private String getOSWebDriverPath() throws OperatingSystemNotSupportedException {
         String OS = System.getProperty(OS_NAME).toLowerCase();
         String OSPath;
 
@@ -90,39 +90,39 @@ public class BrowserSupport {
         return OSPath + "/";
     }
 
-    private String getBrowserWebdriverName() throws BrowserNotSupportedException {
+    private String getBrowserWebDriverName() throws BrowserNotSupportedException {
         if (browserName.equalsIgnoreCase(CHROME)) {
-            return webdriverChrome;
+            return webDriverChrome;
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
-            return webdriverFirefox;
+            return webDriverFirefox;
         } else {
             throw new BrowserNotSupportedException(browserName);
         }
     }
 
-    private WebDriver getBrowserWebdriver() throws BrowserNotSupportedException {
+    private WebDriver getBrowserWebDriver() throws BrowserNotSupportedException {
         if (browserName.equalsIgnoreCase(CHROME)) {
-            return getChromeWebdriver();
+            return getChromeWebDriver();
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
-            return getFirefoxWebdriver();
+            return getFirefoxWebDriver();
         } else if (browserName.equalsIgnoreCase(EDGE)) {
-            return getEdgeWebdriver();
+            return getEdgeWebDriver();
         } else {
             throw new BrowserNotSupportedException(browserName);
         }
     }
 
-    private String getBrowserWebdriverFilename() throws BrowserNotSupportedException {
+    private String getBrowserWebDriverFilename() throws BrowserNotSupportedException {
         if (browserName.equalsIgnoreCase(CHROME)) {
-            return webdriverChromeFilename;
+            return webDriverChromeFilename;
         } else if (browserName.equalsIgnoreCase(FIREFOX)) {
-            return webdriverFirefoxFilename;
+            return webDriverFirefoxFilename;
         } else {
             throw new BrowserNotSupportedException(browserName);
         }
     }
 
-    private WebDriver getChromeWebdriver() {
+    private WebDriver getChromeWebDriver() {
         return new ChromeDriver(getChromeOptions());
     }
 
@@ -133,7 +133,7 @@ public class BrowserSupport {
         return options;
     }
 
-    private WebDriver getFirefoxWebdriver() {
+    private WebDriver getFirefoxWebDriver() {
         return new FirefoxDriver(getFirefoxOptions());
     }
 
@@ -145,7 +145,7 @@ public class BrowserSupport {
     }
 
     // EdgeOptions are limited so haven't been used here.
-    private WebDriver getEdgeWebdriver() {
+    private WebDriver getEdgeWebDriver() {
         return new EdgeDriver();
     }
 
