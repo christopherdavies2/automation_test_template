@@ -33,6 +33,8 @@ In the 'common.properties' file change the value of the 'browser' property to be
 You can also add a 'browser' property to one of the '{environment}.properties' files to run a specific browser for a particular 
 environment.
 
+Please note that at time of writing (4/6/19) Edge is not currently supported on MacOS.
+
 # Reporting
 
 This project uses Cluecumber for reports: https://github.com/trivago/cluecumber-report-plugin.
