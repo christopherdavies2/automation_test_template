@@ -1,37 +1,40 @@
 package com.automatedtesting.support;
 
+import io.restassured.response.Response;
+
 import java.util.Map;
 
 import static com.jayway.jsonassert.JsonAssert.with;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 public class JSONSupport {
     private static final String IS_BOOLEAN_REGEX = "^true|false$";
     private static final String IS_INTEGER_REGEX = "^-?(0|[1-9]\\d*)$";
     private static final String IS_FLOAT_REGEX = "^\\d*\\.?\\d+$";
 
-    public void assertEachJsonPathValueIsInJson(String json, Map<String, String> jsonPathAndExpValues) {
-        assertThat(json).isNotNull();
-        assertThat(json).isNotEmpty();
+    public void assertEachJsonPathValueIsInResponse(Response response, Map<String, String> jsonPathAndExpValues) {
+        String json = response.getBody().asString();
+        assertThat(json).isNotNull().isNotEmpty();
 
         for (Map.Entry<String, String> entry : jsonPathAndExpValues.entrySet()) {
             String jsonPath = entry.getKey();
             String expValue = entry.getValue();
-            assertJsonPathValueIsInJson(json, jsonPath, expValue);
+            assertJsonPathValueIsInResponse(response, jsonPath, expValue);
         }
     }
 
-    public void assertJsonPathValueIsInJson(String json, String jsonPath, String expValue) {
+    public void assertJsonPathValueIsInResponse(Response response, String jsonPath, String expValue) {
+        String json = response.getBody().asString();
+
         if (expValue.matches(IS_BOOLEAN_REGEX)) {
-            with(json).assertEquals(jsonPath, Boolean.valueOf(expValue));
+            with(json).assertThat(jsonPath, is(Boolean.valueOf(expValue)));
         } else if (expValue.matches(IS_INTEGER_REGEX)) {
-            with(json).assertEquals(jsonPath, Integer.parseInt(expValue));
+            with(json).assertThat(jsonPath, is(Integer.parseInt(expValue)));
         } else if (expValue.matches(IS_FLOAT_REGEX)) {
-            with(json).assertEquals(jsonPath, Float.parseFloat(expValue));
+            with(json).assertThat(jsonPath, is(Float.parseFloat(expValue)));
         } else {
-            with(json).assertEquals(jsonPath, expValue);
+            with(json).assertThat(jsonPath, is(expValue));
         }
     }
-
-
 }

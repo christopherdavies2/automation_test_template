@@ -47,9 +47,8 @@ public class RapidAPISteps implements En {
         });
 
         Then("^the following JSON is in the response body:$", (DataTable dataTable) -> {
-            String json = response.getBody().asString();
             Map<String, String> jsonPathAndValues = dataTable.asMap(String.class, String.class);
-            jsonSupport.assertEachJsonPathValueIsInJson(json, jsonPathAndValues);
+            jsonSupport.assertEachJsonPathValueIsInResponse(response, jsonPathAndValues);
         });
     }
 }
