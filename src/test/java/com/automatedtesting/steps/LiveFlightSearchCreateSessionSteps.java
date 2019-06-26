@@ -3,13 +3,15 @@ package com.automatedtesting.steps;
 import cucumber.api.java8.*;
 import io.cucumber.datatable.*;
 import io.restassured.*;
+import io.restassured.config.*;
 import io.restassured.http.*;
 import io.restassured.response.*;
 import io.restassured.specification.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.*;
-import org.json.JSONObject;
 
 import java.util.*;
+import java.util.logging.*;
 
 import static io.restassured.config.EncoderConfig.*;
 import static org.assertj.core.api.Assertions.*;
@@ -18,7 +20,7 @@ public class LiveFlightSearchCreateSessionSteps implements En {
 
     private static final String X_RAPID_API_HOST = "X-RapidAPI-Host";
     private static final String X_RAPID_API_KEY = "X-RapidAPI-Key";
-    private static final String SERVICES_PRICING_V_1_0 = "/services/pricing/v1.0";
+    private static final String SERVICES_PRICING_V_1_0 = "/apiservices/pricing/v1.0";
 
     private RequestSpecification request = RestAssured.given();
     private Response response;
@@ -33,6 +35,7 @@ public class LiveFlightSearchCreateSessionSteps implements En {
     private String skyscannerAPIKey;
 
     public LiveFlightSearchCreateSessionSteps() {
+
         Given("^I am using the Skyscanner Flight Search API base URI$", () -> {
             request.baseUri(baseUri);
         });
@@ -42,10 +45,15 @@ public class LiveFlightSearchCreateSessionSteps implements En {
 
             request.header(X_RAPID_API_HOST, skyscannerAPIHost);
             request.header(X_RAPID_API_KEY, skyscannerAPIKey);
+            request.config(RestAssured.config()
+                    .encoderConfig(EncoderConfig.encoderConfig()
+                    .encodeContentTypeAs("x-www-form-urlencoded", ContentType.URLENC)))
+                    .contentType("application/x-www-form-urlencoded");
 
-            request.config(RestAssured.config().encoderConfig(encoderConfig().encodeContentTypeAs("application\\/x-www-form-urlencoded", ContentType.URLENC)));
             Map<String, String> params = dataTable.asMap(String.class, String.class);
             request.formParams(params);
+
+
 
             response = request.post();
         });
