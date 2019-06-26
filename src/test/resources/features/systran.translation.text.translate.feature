@@ -1,7 +1,7 @@
 @api
-Feature: Rapid API
+Feature: Systran Translation Text Translate
 
-  An API that translates text.
+  An endpoint that translates text.
   https://rapidapi.com/systran/api/systran-io-translation-and-nlp?endpoint=568bd090e4b0e203818a59f0
 
   GET /translation/text/translate?source={source}&target={target}&input={input})
