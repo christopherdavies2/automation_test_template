@@ -12,14 +12,19 @@ import org.springframework.beans.factory.annotation.*;
 
 import java.util.*;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.*;
 
 public class LiveFlightSearchCreateSessionSteps implements En {
 
+    private static final Logger LOG = Logger.getLogger(LiveFlightSearchCreateSessionSteps.class);
+
     private static final String X_RAPID_API_HOST = "X-RapidAPI-Host";
     private static final String X_RAPID_API_KEY = "X-RapidAPI-Key";
     private static final String SERVICES_PRICING_V_1_0 = "/apiservices/pricing/v1.0";
-    private static final Logger LOG = Logger.getLogger(LiveFlightSearchCreateSessionSteps.class);
+    private static final String APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
+    private static final String X_WWW_FORM_URLENCODED = "x-www-form-urlencoded";
+    private static final String EMPTY_CURLY_BRACKETS = "{}";
 
     private RequestSpecification request = RestAssured.given();
     private Response response;
@@ -40,26 +45,23 @@ public class LiveFlightSearchCreateSessionSteps implements En {
         });
 
         When("^I call POST \\/services\\/pricing\\/v1.0 with the following parameters:$", (DataTable dataTable) -> {
-            request.basePath(SERVICES_PRICING_V_1_0);
-            request.header(X_RAPID_API_HOST, skyscannerAPIHost);
-            request.header(X_RAPID_API_KEY, skyscannerAPIKey);
-            request.config(RestAssured.config()
-                    .encoderConfig(EncoderConfig.encoderConfig()
-                    .encodeContentTypeAs("x-www-form-urlencoded", ContentType.URLENC)))
-                    .contentType("application/x-www-form-urlencoded");
-
             Map<String, String> params = dataTable.asMap(String.class, String.class);
-            request.formParams(params);
 
-            LOG.info(request.log().method().toString());
-            LOG.info(request.log().uri().toString());
-            LOG.info(request.log().params().toString());
+            request.basePath(SERVICES_PRICING_V_1_0)
+                   .header(X_RAPID_API_HOST, skyscannerAPIHost)
+                   .header(X_RAPID_API_KEY, skyscannerAPIKey)
+                   .formParams(params)
+                   .config(RestAssured.config()
+                                      .encoderConfig(EncoderConfig.encoderConfig()
+                                      .encodeContentTypeAs(X_WWW_FORM_URLENCODED, ContentType.URLENC)))
+                                      .contentType(APPLICATION_X_WWW_FORM_URLENCODED);
 
+            LOG.info(request.log().everything());
             response = request.post();
         });
 
         Then("^the response will return a HTTP (\\d{3}) status$", (Integer statusCode) -> {
-            System.out.println(response.body().asString());
+            LOG.info(response.body().asString());
             assertThat(response.statusCode()).isEqualTo(statusCode);
         });
 
@@ -73,7 +75,7 @@ public class LiveFlightSearchCreateSessionSteps implements En {
         });
 
         Then("^the response body will be empty$", () -> {
-            assertThat(response.body()).isEqualTo("{}");
+            assertThat(response.body()).isEqualTo(EMPTY_CURLY_BRACKETS);
         });
     }
 }
