@@ -18,7 +18,7 @@ public class SystranAPISteps implements En {
     private static final String X_RAPID_API_HOST = "X-RapidAPI-Host";
     private static final String X_RAPID_API_KEY = "X-RapidAPI-Key";
     private static final String TRANSLATION_TEXT_TRANSLATE = "/translation/text/translate";
-    private static final String TRANSLATE_SCHEMA_JSON = "translate-schema.json";
+    private static final String TRANSLATE_SCHEMA_JSON = "schemas/translate-schema.json";
 
     private RequestSpecification request;
     private JSONSupport jsonSupport = new JSONSupport();
