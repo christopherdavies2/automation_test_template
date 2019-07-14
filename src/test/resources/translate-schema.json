@@ -1,0 +1,53 @@
+{
+ "$schema": "http://json-schema.org/draft-04/schema#",
+ "type": "object",
+ "properties": {
+  "outputs": {
+   "type": "array",
+   "items": [
+    {
+     "type": "object",
+     "properties": {
+      "output": {
+       "type": "string"
+      },
+      "stats": {
+       "type": "object",
+       "properties": {
+        "elapsed_time": {
+         "type": "integer"
+        },
+        "nb_characters": {
+         "type": "integer"
+        },
+        "nb_tokens": {
+         "type": "integer"
+        },
+        "nb_tus": {
+         "type": "integer"
+        },
+        "nb_tus_failed": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "elapsed_time",
+        "nb_characters",
+        "nb_tokens",
+        "nb_tus",
+        "nb_tus_failed"
+       ]
+      }
+     },
+     "required": [
+      "output",
+      "stats"
+     ]
+    }
+   ]
+  }
+ },
+ "required": [
+  "outputs"
+ ]
+}

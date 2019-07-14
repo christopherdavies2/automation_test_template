@@ -15,7 +15,9 @@ Feature: Systran Translation Text Translate
       | source | en    |
       | target | fr    |
       | input  | hello |
-    Then the following JSON is in the response body:
+    Then the response returns a HTTP status code of 200
+    And the response follows the schema specified in "translate-schema.json"
+    And the following JSON is in the response body:
       | $.outputs[0].output              | bonjour |
       | $.outputs[0].stats.nb_characters | 5       |
       | $.outputs[0].stats.nb_tokens     | 1       |
