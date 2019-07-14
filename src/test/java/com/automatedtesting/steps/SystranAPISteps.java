@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
-public class RapidAPISteps implements En {
+public class SystranAPISteps implements En {
 
     private static final String X_RAPID_API_HOST = "X-RapidAPI-Host";
     private static final String X_RAPID_API_KEY = "X-RapidAPI-Key";
@@ -19,18 +19,18 @@ public class RapidAPISteps implements En {
     private RequestSpecification request = RestAssured.given();
     private JSONSupport jsonSupport = new JSONSupport();
 
-    @Value("${rapidapi.base.uri}")
+    @Value("${systran.base.uri}")
     private String baseUri;
 
-    @Value("${rapidapi.header.x.rapidapi.host}")
+    @Value("${systran.header.x.rapidapi.host}")
     private String rapidAPIHost;
 
-    @Value("${rapidapi.header.x.rapidapi.key}")
+    @Value("${systran.header.x.rapidapi.key}")
     private String rapidAPIKey;
 
     private Response response;
 
-    public RapidAPISteps() {
+    public SystranAPISteps() {
         Given("^I am using the language processing base URI$", () -> {
             request.baseUri(baseUri);
         });
