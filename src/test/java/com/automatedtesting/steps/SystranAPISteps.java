@@ -50,11 +50,11 @@ public class SystranAPISteps implements En {
             response = request.when().get();
         });
 
-        Then("the response returns a HTTP status code of {int}", (Integer expStatusCode) -> {
+        Then("^the response returns a HTTP status code of (\\d{3})$", (Integer expStatusCode) -> {
             assertThat(response.statusCode()).isEqualTo(expStatusCode);
         });
 
-        Then("the response follows the schema specified in {string}", (String schemaFile) -> {
+        Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFile) -> {
             response.then().body(matchesJsonSchemaInClasspath(TRANSLATE_SCHEMA_JSON));
         });
 
