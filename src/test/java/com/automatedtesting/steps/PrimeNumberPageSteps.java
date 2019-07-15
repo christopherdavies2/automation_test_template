@@ -7,12 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrimeNumberPageSteps implements En {
-    private final PrimeNumberPage primeNumberPage;
 
     @Autowired
     public PrimeNumberPageSteps(PrimeNumberPage primeNumberPage) {
-        this.primeNumberPage = primeNumberPage;
-
         Given("^I am on the Prime Number page$", () ->
           primeNumberPage.goToPage()
         );
