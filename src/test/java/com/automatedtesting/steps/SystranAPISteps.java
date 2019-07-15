@@ -18,7 +18,6 @@ public class SystranAPISteps implements En {
     private static final String X_RAPID_API_HOST = "X-RapidAPI-Host";
     private static final String X_RAPID_API_KEY = "X-RapidAPI-Key";
     private static final String TRANSLATION_TEXT_TRANSLATE = "/translation/text/translate";
-    private static final String TRANSLATE_SCHEMA_JSON = "schemas/translate-schema.json";
 
     private RequestSpecification request;
     private JSONSupport jsonSupport = new JSONSupport();
@@ -55,7 +54,7 @@ public class SystranAPISteps implements En {
         });
 
         Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFile) -> {
-            response.then().body(matchesJsonSchemaInClasspath(TRANSLATE_SCHEMA_JSON));
+            response.then().body(matchesJsonSchemaInClasspath("schemas/" + schemaFile));
         });
 
         Then("^the following JSON is in the response body:$", (DataTable dataTable) -> {
