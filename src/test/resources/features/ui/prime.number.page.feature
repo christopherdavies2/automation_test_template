@@ -1,3 +1,4 @@
+@ui
 Feature: Prime Number Page
 
   A page that allows you to check if a number is prime or not.
