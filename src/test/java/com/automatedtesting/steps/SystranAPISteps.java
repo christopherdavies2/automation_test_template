@@ -1,15 +1,13 @@
 package com.automatedtesting.steps;
 
-import com.automatedtesting.support.JSONSupport;
-import com.automatedtesting.support.ResponseSupport;
-import cucumber.api.java8.En;
-import io.cucumber.datatable.DataTable;
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.automatedtesting.support.*;
+import cucumber.api.java8.*;
+import io.cucumber.datatable.*;
+import io.restassured.*;
+import io.restassured.specification.*;
+import org.springframework.beans.factory.annotation.*;
 
-import java.util.Map;
+import java.util.*;
 
 public class SystranAPISteps implements En {
 
@@ -18,7 +16,6 @@ public class SystranAPISteps implements En {
     private static final String TRANSLATION_TEXT_TRANSLATE = "/translation/text/translate";
 
     private RequestSpecification request;
-    private JSONSupport jsonSupport = new JSONSupport();
 
     @Value("${systran.base.uri}")
     private String baseUri;
@@ -34,7 +31,7 @@ public class SystranAPISteps implements En {
 
     public SystranAPISteps() {
         Given("^I am using the language processing base URI$", () -> {
-            request = RestAssured.given().baseUri(baseUri);
+            request = RestAssured.given().baseUri(baseUri).log().all();
         });
 
         When("^I call GET \\/translation\\/text\\/translate with the parameters:$", (DataTable dataTable) -> {

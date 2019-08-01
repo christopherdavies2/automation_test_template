@@ -7,6 +7,7 @@ import java.util.Map;
 import static com.jayway.jsonassert.JsonAssert.with;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class JSONSupport {
     private static final String IS_BOOLEAN_REGEX = "^true|false$";
@@ -37,4 +38,10 @@ public class JSONSupport {
             with(json).assertThat(jsonPath, is(expValue));
         }
     }
+
+    public void assertJsonPathValueIsGreaterThan(Response response, String jsonPath, int expValue) {
+        String json = response.getBody().asString();
+        with(json).assertThat(jsonPath, greaterThan(expValue));
+    }
+
 }

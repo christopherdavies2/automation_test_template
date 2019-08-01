@@ -1,7 +1,7 @@
 package com.automatedtesting.support;
 
-import io.restassured.response.Response;
-import org.springframework.stereotype.Component;
+import io.restassured.response.*;
+import org.springframework.stereotype.*;
 
 @Component
 public class ResponseSupport {
@@ -13,5 +13,6 @@ public class ResponseSupport {
 
     public void setResponse(Response response) {
         this.response = response;
+        this.response.then().log().all();
     }
 }

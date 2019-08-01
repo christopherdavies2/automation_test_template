@@ -21,3 +21,6 @@ Feature: Systran Translation Text Translate
       | $.outputs[0].output              | bonjour |
       | $.outputs[0].stats.nb_characters | 5       |
       | $.outputs[0].stats.nb_tokens     | 1       |
+      | $.outputs[0].stats.nb_tus        | 1       |
+      | $.outputs[0].stats.nb_tus_failed | 0       |
+    And the attribute $.outputs[0].stats.elapsed_time has a value greater than 0
