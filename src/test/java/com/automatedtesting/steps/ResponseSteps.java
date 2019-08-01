@@ -25,6 +25,7 @@ public class ResponseSteps implements En {
         });
 
         Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFile) -> {
+            // TODO: put this in ResponseSupport
             responseSupport.getResponse().then().body(matchesJsonSchemaInClasspath(SCHEMAS_PATH + schemaFile));
         });
 
@@ -38,6 +39,7 @@ public class ResponseSteps implements En {
         });
 
         Then("the response matches the contents of the file specified in \"(.+)\"", (String filename) -> {
+            // TODO: put this in ResponseSupport
             String expContents = fileSupport.getFileContents(EXPECTED_RESPONSES_PATH + filename);
             String body = responseSupport.getResponse().body().asString();
             assertThat(body).isEqualTo(expContents);
