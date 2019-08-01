@@ -12,7 +12,9 @@ import static org.assertj.core.api.Java6Assertions.*;
 
 public class ResponseSteps implements En {
     private static final String SCHEMAS_PATH = "schemas/";
+    private static final String EXPECTED_RESPONSES_PATH = "expected-responses/";
     private JSONSupport jsonSupport = new JSONSupport();
+    private FileSupport fileSupport = new FileSupport();
 
     @Autowired
     private ResponseSupport responseSupport;
@@ -33,6 +35,12 @@ public class ResponseSteps implements En {
 
         Then("the attribute (.+) has a value greater than (\\d+)", (String jsonPath, Integer expValue) -> {
             jsonSupport.assertJsonPathValueIsGreaterThan(responseSupport.getResponse(), jsonPath, expValue);
+        });
+
+        Then("the response matches the contents of the file specified in \"(.+)\"", (String filename) -> {
+            String expContents = fileSupport.getFileContents(EXPECTED_RESPONSES_PATH + filename);
+            String body = responseSupport.getResponse().body().asString();
+            assertThat(body).isEqualTo(expContents);
         });
     }
 }
