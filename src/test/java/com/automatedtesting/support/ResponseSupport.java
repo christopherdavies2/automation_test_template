@@ -13,6 +13,5 @@ public class ResponseSupport {
 
     public void setResponse(Response response) {
         this.response = response;
-        this.response.then().log().all();
     }
 }

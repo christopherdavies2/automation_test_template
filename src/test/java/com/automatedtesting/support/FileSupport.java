@@ -19,6 +19,6 @@ public class FileSupport {
         catch (IOException | URISyntaxException ex) {
             LOG.info(ex.getMessage());
         }
-        return contentBuilder.toString();
+        return contentBuilder.toString().trim();
     }
 }

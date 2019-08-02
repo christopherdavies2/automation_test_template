@@ -13,6 +13,7 @@ import static org.assertj.core.api.Java6Assertions.*;
 public class ResponseSteps implements En {
     private static final String SCHEMAS_PATH = "schemas/";
     private static final String EXPECTED_RESPONSES_PATH = "expected-responses/";
+
     private JSONSupport jsonSupport = new JSONSupport();
     private FileSupport fileSupport = new FileSupport();
 
@@ -25,7 +26,6 @@ public class ResponseSteps implements En {
         });
 
         Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFile) -> {
-            // TODO: put this in ResponseSupport
             responseSupport.getResponse().then().body(matchesJsonSchemaInClasspath(SCHEMAS_PATH + schemaFile));
         });
 
@@ -34,15 +34,14 @@ public class ResponseSteps implements En {
             jsonSupport.assertEachJsonPathValueIsInResponse(responseSupport.getResponse(), jsonPathAndValues);
         });
 
-        Then("the attribute (.+) has a value greater than (\\d+)", (String jsonPath, Integer expValue) -> {
+        Then("^the attribute (.+) has a value greater than (\\d+)$", (String jsonPath, Integer expValue) -> {
             jsonSupport.assertJsonPathValueIsGreaterThan(responseSupport.getResponse(), jsonPath, expValue);
         });
 
-        Then("the response matches the contents of the file specified in \"(.+)\"", (String filename) -> {
-            // TODO: put this in ResponseSupport
-            String expContents = fileSupport.getFileContents(EXPECTED_RESPONSES_PATH + filename);
-            String body = responseSupport.getResponse().body().asString();
-            assertThat(body).isEqualTo(expContents);
+        Then("^the response matches the contents of the file specified in \"(.+)\"$", (String filename) -> {
+            String expBody = fileSupport.getFileContents(EXPECTED_RESPONSES_PATH + filename);
+            String actBody = responseSupport.getResponse().body().prettyPrint();
+            assertThat(actBody).isEqualTo(expBody);
         });
     }
 }
