@@ -9,7 +9,7 @@ Feature: Users
     Given I am using the mockapi base URI
     When I call GET /users/1
     Then the response returns a HTTP status code of 200
-    # TODO: add schema check
+    And the response follows the schema specified in "user_by_id.json"
     And the following JSON is in the response body:
       | $.id               | 1                        |
       | $.createdAt        | 2019-03-09T20:15:02.098Z |
