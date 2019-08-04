@@ -1,12 +1,11 @@
-package com.automatedtesting.steps;
+package com.automatedtesting.steps.api;
 
 import com.automatedtesting.support.ResponseSupport;
 import cucumber.api.java8.En;
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
-public class UsersSteps implements En {
+public class UsersSteps extends APIBaseSteps implements En {
 
     private static final String USERS = "users/";
 
@@ -15,8 +14,6 @@ public class UsersSteps implements En {
 
     @Autowired
     private ResponseSupport responseSupport;
-
-    private RequestSpecification request = RestAssured.given().log().all();
 
     public UsersSteps() {
         Given("^I am using the mockapi base URI$", () -> {

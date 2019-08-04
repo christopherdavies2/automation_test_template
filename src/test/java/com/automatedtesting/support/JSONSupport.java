@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static com.jayway.jsonassert.JsonAssert.with;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class JSONSupport {
 

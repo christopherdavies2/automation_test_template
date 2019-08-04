@@ -24,5 +24,3 @@ Feature: Systran Translation Text Translate
       | $.outputs[0].stats.nb_tus        | 1       |
       | $.outputs[0].stats.nb_tus_failed | 0       |
     And the attribute $.outputs[0].stats.elapsed_time has a value greater than 0
-#    this will currently fail due to dynamic elapsed_time
-    And the response matches the contents of the file specified in "translate-hello.json"

@@ -1,7 +1,7 @@
 package com.automatedtesting.support;
 
-import io.restassured.response.*;
-import org.springframework.stereotype.*;
+import io.restassured.response.Response;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseSupport {

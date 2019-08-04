@@ -1,4 +1,4 @@
-package com.automatedtesting.steps;
+package com.automatedtesting.steps.ui;
 
 import com.automatedtesting.pages.PrimeNumberPage;
 import cucumber.api.java8.En;

@@ -1,4 +1,4 @@
-@wip
+@api
 Feature: Users
 
   /GET http://5d3496f35b83cd0014d0a7fc.mockapi.io/apitesting/v1/users
