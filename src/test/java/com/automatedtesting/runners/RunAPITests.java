@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features = "classpath:features",
         glue = {"com.automatedtesting.steps"},
         snippets = SnippetType.CAMELCASE,
-        tags = "@api",
+        tags = "@wip",
         plugin = {"pretty", "json:target/cucumber-report/runapitests.json"})
 public class RunAPITests {
 }
