@@ -9,7 +9,7 @@ Feature: Users
     Given I am using the mockapi base URI
     When I call GET /users/1
     Then the response returns a HTTP status code of 200
-    And the response follows the schema specified in "user_by_id.json"
+    And the response follows the schema specified in "user_by_id_schema.json"
     And the following JSON is in the response body:
       | $.id               | 1                        |
       | $.createdAt        | 2019-03-09T20:15:02.098Z |
@@ -22,3 +22,11 @@ Feature: Users
       | $.address.street   | 11 A street              |
       | $.address.city     | Leeds                    |
       | $.address.postcode | LS1 1A1                  |
+
+  Scenario: Get all users
+    Given I am using the mockapi base URI
+    When I call GET /users
+    Then the response returns a HTTP status code of 200
+    And the response follows the schema specified in "users_schema.json"
+    And the attribute $.[*] has at least 1 array
+    And the response matches the contents of the file specified in "users_response.json"

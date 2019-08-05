@@ -11,9 +11,6 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ResponseSteps extends APIBaseSteps implements En {
-    private static final String SCHEMAS_PATH = "schemas/";
-    private static final String EXPECTED_RESPONSES_PATH = "expected-responses/";
-
     private JSONSupport jsonSupport = new JSONSupport();
     private FileSupport fileSupport = new FileSupport();
 
@@ -23,7 +20,7 @@ public class ResponseSteps extends APIBaseSteps implements En {
         });
 
         Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFile) -> {
-            responseSupport.getResponse().then().body(matchesJsonSchemaInClasspath(SCHEMAS_PATH + schemaFile));
+            responseSupport.getResponse().then().body(matchesJsonSchemaInClasspath(schemasPath + schemaFile));
         });
 
         Then("^the following JSON is in the response body:$", (DataTable dataTable) -> {
@@ -36,9 +33,17 @@ public class ResponseSteps extends APIBaseSteps implements En {
         });
 
         Then("^the response matches the contents of the file specified in \"(.+)\"$", (String filename) -> {
-            String expBody = fileSupport.getFileContents(EXPECTED_RESPONSES_PATH + filename);
+            String expBody = fileSupport.getFileContents(expectedResponsesPath + filename);
+            // prettyPrint() is used here so that the json is formatted
             String actBody = responseSupport.getResponse().body().prettyPrint();
             assertThat(actBody).isEqualTo(expBody);
         });
+
+        Then("^the attribute (.+) has at least (\\d+) arrays?$", (String jsonPath, Integer expNum) -> {
+            String json = responseSupport.getResponse().body().asString();
+            jsonSupport.assertJsonPathValueContainsAtLeastXArrays(json, jsonPath, expNum);
+        });
     }
+
+
 }

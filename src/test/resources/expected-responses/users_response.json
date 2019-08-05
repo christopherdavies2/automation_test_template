@@ -1,0 +1,87 @@
+[
+    {
+        "id": "1",
+        "createdAt": "2019-03-09T20:15:02.098Z",
+        "name": "Norbert Wiza",
+        "isPartTime": false,
+        "locationId": 16,
+        "favLanguages": [
+            "java",
+            "ruby",
+            "python"
+        ],
+        "address": {
+            "street": "11 A street",
+            "city": "Leeds",
+            "postcode": "LS1 1A1"
+        }
+    },
+    {
+        "id": "2",
+        "createdAt": "2018-12-22T00:44:22.800Z",
+        "name": "Alene Schimmel",
+        "isPartTime": false,
+        "locationId": 95,
+        "favLanguages": [
+            "java",
+            "ruby",
+            "python"
+        ],
+        "address": {
+            "street": "12 A street",
+            "city": "Leeds",
+            "postcode": "LS1 1A2"
+        }
+    },
+    {
+        "id": "3",
+        "createdAt": "2018-11-25T09:33:58.345Z",
+        "name": "Darius Jast",
+        "isPartTime": false,
+        "locationId": 1,
+        "favLanguages": [
+            "java",
+            "ruby",
+            "python"
+        ],
+        "address": {
+            "street": "13 A street",
+            "city": "Leeds",
+            "postcode": "LS1 1A3"
+        }
+    },
+    {
+        "id": "4",
+        "createdAt": "2019-07-18T09:41:08.675Z",
+        "name": "Amani Vandervort",
+        "isPartTime": false,
+        "locationId": 67,
+        "favLanguages": [
+            "java",
+            "ruby",
+            "python"
+        ],
+        "address": {
+            "street": "14 A street",
+            "city": "Leeds",
+            "postcode": "LS1 1A4"
+        }
+    },
+    {
+        "id": "5",
+        "createdAt": "2019-02-25T02:24:11.947Z",
+        "name": "Cleveland Torp",
+        "isPartTime": false,
+        "locationId": 22,
+        "favLanguages": [
+            "java",
+            "ruby",
+            "python"
+        ],
+        "address": {
+            "street": "15 A street",
+            "city": "Leeds",
+            "postcode": "LS1 1A5"
+        }
+    }
+]

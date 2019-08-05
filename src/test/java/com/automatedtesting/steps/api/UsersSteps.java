@@ -24,6 +24,11 @@ public class UsersSteps extends APIBaseSteps implements En {
             request.basePath(USERS + id);
             responseSupport.setResponse(request.when().get());
         });
+
+        When("I call GET \\/users", () -> {
+            request.basePath(USERS);
+            responseSupport.setResponse(request.when().get());
+        });
     }
 }
 
