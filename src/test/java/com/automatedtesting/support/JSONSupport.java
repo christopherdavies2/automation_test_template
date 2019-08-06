@@ -46,7 +46,7 @@ public class JSONSupport {
         response.then().body(matchesJsonSchemaInClasspath(schemaPath));
     }
 
-    public void assertJsonMatchesExpectedResponseFile(Response response, String filePath) {
+    public void assertJsonMatchesFileContents(Response response, String filePath) {
         // prettyPrint() is used here so that the json is formatted just like it is in the expected response file
         String actBody = response.body().prettyPrint();
         String expBody = fileSupport.getFileContents(filePath);

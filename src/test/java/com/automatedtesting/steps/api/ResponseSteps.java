@@ -38,7 +38,7 @@ public class ResponseSteps extends APIBaseSteps implements En {
         });
 
         Then("^the response matches the contents of the file specified in \"(.+)\"$", (String filename) -> {
-            jsonSupport.assertJsonMatchesExpectedResponseFile(responseSupport.getResponse(),
+            jsonSupport.assertJsonMatchesFileContents(responseSupport.getResponse(),
                     expectedResponsesPath + filename);
         });
 

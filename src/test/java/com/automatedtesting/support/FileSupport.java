@@ -8,10 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-public class FileSupport {
+class FileSupport {
     private static final Logger LOG = Logger.getLogger(FileSupport.class);
 
-    public String getFileContents(String filePath) {
+    String getFileContents(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
 
         try {
