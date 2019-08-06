@@ -1,26 +1,31 @@
 package com.automatedtesting.steps.api;
 
-import com.automatedtesting.support.FileSupport;
 import com.automatedtesting.support.JSONSupport;
 import cucumber.api.java8.En;
 import io.cucumber.datatable.DataTable;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResponseSteps extends APIBaseSteps implements En {
+    @Value("${json.expected.responses}")
+    private String expectedResponsesPath;
+
+    @Value("${json.schemas.path}")
+    private String schemasPath;
+
     private JSONSupport jsonSupport = new JSONSupport();
-    private FileSupport fileSupport = new FileSupport();
 
     public ResponseSteps() {
         Then("^the response returns a HTTP status code of (\\d{3})$", (Integer expStatusCode) -> {
             assertThat(responseSupport.getResponse().statusCode()).isEqualTo(expStatusCode);
         });
 
-        Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFile) -> {
-            responseSupport.getResponse().then().body(matchesJsonSchemaInClasspath(schemasPath + schemaFile));
+        Then("^the response follows the schema specified in \"(.+)\"$", (String schemaFilename) -> {
+            jsonSupport.assertJsonMatchesSchema(responseSupport.getResponse(),
+                    schemasPath + schemaFilename);
         });
 
         Then("^the following JSON is in the response body:$", (DataTable dataTable) -> {
@@ -33,17 +38,13 @@ public class ResponseSteps extends APIBaseSteps implements En {
         });
 
         Then("^the response matches the contents of the file specified in \"(.+)\"$", (String filename) -> {
-            String expBody = fileSupport.getFileContents(expectedResponsesPath + filename);
-            // prettyPrint() is used here so that the json is formatted
-            String actBody = responseSupport.getResponse().body().prettyPrint();
-            assertThat(actBody).isEqualTo(expBody);
+            jsonSupport.assertJsonMatchesExpectedResponseFile(responseSupport.getResponse(),
+                    expectedResponsesPath + filename);
         });
 
         Then("^the attribute (.+) has at least (\\d+) arrays?$", (String jsonPath, Integer expNum) -> {
-            String json = responseSupport.getResponse().body().asString();
-            jsonSupport.assertJsonPathValueContainsAtLeastXArrays(json, jsonPath, expNum);
+            jsonSupport.assertJsonPathValueContainsAtLeastXArrays(responseSupport.getResponse(), jsonPath, expNum);
         });
     }
-
 
 }
