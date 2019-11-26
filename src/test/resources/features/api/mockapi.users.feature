@@ -5,8 +5,10 @@ Feature: Users
 
   A mock API that retrieves user information
 
-  Scenario: Get user by ID
+  Background:
     Given I am using the mockapi base URI
+
+  Scenario: Get user by ID
     When I call GET /users/1
     Then the response returns a HTTP status code of 200
     And the response follows the schema specified in "user_by_id_schema.json"
@@ -24,9 +26,26 @@ Feature: Users
       | $.address.postcode | LS1 1A1                  |
 
   Scenario: Get all users
-    Given I am using the mockapi base URI
     When I call GET /users
     Then the response returns a HTTP status code of 200
     And the response follows the schema specified in "users_schema.json"
     And the attribute $.[*] has at least 1 array
     And the response matches the contents of the file specified in "users_response.json"
+
+#  TODO: need to find login details for mockapi, then set up POST endpoint
+  Scenario: Post a user
+    When I call POST /users with the following JSON:
+    """
+    {
+    }
+    """
+    Then the response returns a HTTP status code of 200
+
+#  TODO:
+#  Scenario: Delete a user
+#    When I call DELETE /users/999
+#    # assuming its a 201 here
+#    Then the response returns a HTTP status code of 201
+#    And I call GET /users/999
+#    # again assuming a non-existent user is a 404 here
+#    And the response returns a HTTP status code of 404
