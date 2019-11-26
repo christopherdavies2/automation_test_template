@@ -30,7 +30,7 @@ public class UsersSteps extends APIBaseSteps implements En {
             responseSupport.setResponse(request.when().get());
         });
 
-        When("I call POST \\/users with the following JSON:", (String json) -> {
+        When("^I call POST \\/users with the following JSON:$", (String json) -> {
             // Write code here that turns the phrase above into concrete actions
             throw new cucumber.api.PendingException();
         });

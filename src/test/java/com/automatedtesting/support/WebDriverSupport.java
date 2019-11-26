@@ -26,6 +26,8 @@ public class WebDriverSupport {
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
     private static final String EDGE = "edge";
+    private static final String EXCLUDE_SWITCHES = "excludeSwitches";
+    private static final String ENABLE_AUTOMATION = "enable-automation";
 
     @Value("${web.driver.chrome}")
     private String webDriverChrome;
@@ -129,7 +131,7 @@ public class WebDriverSupport {
 
     private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments(DISABLE_INFOBARS);
+        options.setExperimentalOption(EXCLUDE_SWITCHES, new String[]{ENABLE_AUTOMATION});
         options.setHeadless(isHeadless);
         return options;
     }
