@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.stream.Stream;
 
-class FileSupport {
+public class FileSupport {
     private static final Logger LOG = Logger.getLogger(FileSupport.class);
 
-    String getFileContents(String filePath) {
+    public String getFileContents(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
 
         try {

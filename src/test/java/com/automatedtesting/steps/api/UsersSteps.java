@@ -31,8 +31,29 @@ public class UsersSteps extends APIBaseSteps implements En {
         });
 
         When("^I call POST \\/users with the following JSON:$", (String json) -> {
-            // Write code here that turns the phrase above into concrete actions
-            throw new cucumber.api.PendingException();
+            request.basePath(USERS);
+            request.body(json);
+            responseSupport.setResponse(request.when().post());
+        });
+
+        When("^I call PUT \\/users with a request body specified in \"(.+)\"$", (String filename) -> {
+            request.basePath(USERS);
+            String json = requestSupport.getRequestBodyFileContents(filename);
+            request.body(json);
+            responseSupport.setResponse(request.when().put());
+        });
+
+        When("^I call POST \\/users\\/(\\d+) with a request body specified in \"(.+)\"$", (Integer id,
+                                                                                         String filename) -> {
+            request.basePath(USERS + id);
+            String json = requestSupport.getRequestBodyFileContents(filename);
+            request.body(json);
+            responseSupport.setResponse(request.when().post());
+        });
+
+        When("^I call DELETE \\/users\\/(\\d+)$", (Integer id) -> {
+            request.basePath(USERS + id);
+            responseSupport.setResponse(request.when().delete());
         });
     }
 }

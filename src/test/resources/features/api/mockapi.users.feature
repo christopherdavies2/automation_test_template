@@ -3,7 +3,9 @@ Feature: Users
 
   /GET http://5d3496f35b83cd0014d0a7fc.mockapi.io/apitesting/v1/users
 
-  A mock API that retrieves user information
+  A mock API that retrieves user information.
+
+  Data is already mocked so no need for build up or clear down.
 
   Background:
     Given I am using the mockapi base URI
@@ -32,20 +34,14 @@ Feature: Users
     And the attribute $.[*] has at least 1 array
     And the response matches the contents of the file specified in "users_response.json"
 
-#  TODO: need to find login details for mockapi, then set up POST endpoint
-  Scenario: Post a user
-    When I call POST /users with the following JSON:
-    """
-    {
-    }
-    """
-    Then the response returns a HTTP status code of 200
+  Scenario: Add a user
+    When I call PUT /users with a request body specified in "user_request_body.json"
+    Then the response returns a HTTP status code of 201
 
-#  TODO:
-#  Scenario: Delete a user
-#    When I call DELETE /users/999
-#    # assuming its a 201 here
-#    Then the response returns a HTTP status code of 201
-#    And I call GET /users/999
-#    # again assuming a non-existent user is a 404 here
-#    And the response returns a HTTP status code of 404
+  Scenario: Update a user
+    When I call POST /users/999 with a request body specified in "user_request_body.json"
+    Then the response returns a HTTP status code of 201
+
+  Scenario: Delete a user
+    When I call DELETE /users/999
+    And the response returns a HTTP status code of 201
