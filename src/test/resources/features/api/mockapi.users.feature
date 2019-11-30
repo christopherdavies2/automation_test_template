@@ -10,6 +10,7 @@ Feature: Users
   Background:
     Given I am using the mockapi base URI
 
+  @api1
   Scenario: Get user by ID
     When I call GET /users/1
     Then the response returns a HTTP status code of 200
@@ -27,6 +28,7 @@ Feature: Users
       | $.address.city     | Leeds                    |
       | $.address.postcode | LS1 1A1                  |
 
+  @api2
   Scenario: Get all users
     When I call GET /users
     Then the response returns a HTTP status code of 200
@@ -34,10 +36,12 @@ Feature: Users
     And the attribute $.[*] has at least 1 array
     And the response matches the contents of the file specified in "users_response.json"
 
+  @api3
   Scenario: Add a user
     When I call POST /users with a request body specified in "user_request_body.json"
     Then the response returns a HTTP status code of 201
 
+  @api4
   Scenario: Delete a user
     When I call DELETE /users/6
     And the response returns a HTTP status code of 200

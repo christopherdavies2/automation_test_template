@@ -1,6 +1,6 @@
-# Front End Testing Template
+# Automation Testing Template
 
-A template for front end testing using Cucumber JVM, Selenium and Spring.
+A template for API and front end testing using Cucumber JVM.
 
 # Pre-requistes
 
@@ -17,7 +17,7 @@ Using a command line tool, navigate to the root directory containing the 'pom.xm
 This will run 4 runners (marked Runner{number}.java) in parallel.  
 Each runner runs a specified tag.  
 These tags can be found above the scenarios in the 'prime.number.page.feature' file.
-Details of running tests in parallel can be found in the 'pom.xml' file. 
+Details of the parallel running can be found in the 'pom.xml' file. 
 
 # Run Tests for a Specified Environment
 

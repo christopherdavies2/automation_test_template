@@ -58,7 +58,7 @@ public class WebDriverSupport {
             setWebDriverSystemProperties();
             webDriver = getBrowserWebDriver();
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            webDriver.manage().window().fullscreen();
+            webDriver.manage().window().maximize();
         } catch (OperatingSystemNotSupportedException | BrowserNotSupportedException ex) {
             LOG.error(ex.getMessage());
         }
@@ -142,7 +142,6 @@ public class WebDriverSupport {
 
     private FirefoxOptions getFirefoxOptions() {
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments(DISABLE_INFOBARS);
         options.setHeadless(isHeadless);
         return options;
     }

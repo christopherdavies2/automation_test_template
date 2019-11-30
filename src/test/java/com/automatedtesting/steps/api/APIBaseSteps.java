@@ -5,7 +5,6 @@ import com.automatedtesting.support.ResponseSupport;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 abstract class APIBaseSteps {
 

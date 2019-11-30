@@ -8,7 +8,7 @@ Feature: Prime Number Page
   Background:
     Given I am on the Prime Number page
 
-  @runner1
+  @ui1
   Scenario Outline: A prime number is entered
     And I enter the value "<value>"
     When I click "Is it prime?"
@@ -20,7 +20,7 @@ Feature: Prime Number Page
       | 3     | 3 is prime!          |
       | 97    | 97 is prime!         |
 
-  @runner2
+  @ui2
   Scenario Outline: A non-prime number is entered
     And I enter the value "<value>"
     When I click "Is it prime?"
@@ -34,7 +34,7 @@ Feature: Prime Number Page
       | 4     | 4 is not prime.  It is divisible by 2. |
       | 9     | 9 is not prime.  It is divisible by 3. |
 
-  @runner3
+  @ui3
   Scenario Outline: A value other than a number is entered
     And I enter the value "<value>"
     When I click "Is it prime?"
@@ -46,7 +46,7 @@ Feature: Prime Number Page
       | !     |
       | null  |
 
-  @runner4
+  @ui4
   Scenario: No value is entered
     When I click "Is it prime?"
     Then the message " is not a valid number!  Try again!" appears
