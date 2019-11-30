@@ -1,0 +1,14 @@
+{
+  "name": "New User",
+  "email": "new.user@email.com",
+  "imageUrl": "https://unsplash.it/50?image=999",
+  "favLanguages": [
+    "java",
+    "javascript"
+  ],
+  "address": {
+    "street": "1999 A street",
+    "city": "Leeds",
+    "postcode": "LS1 1A999"
+  }
+}

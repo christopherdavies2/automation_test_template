@@ -1,0 +1,7 @@
+Once backend steps are done:
+
+* Find a way to pass the environment as a parameter in the run command
+* If I upgrade to Cucumber 4 do tests still run?
+* If I upgrade to JDK 12 do tests still run?  What is min Java version for Cucumber 4?
+* Dockerise?
+* Run in Docker?

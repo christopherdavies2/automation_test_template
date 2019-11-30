@@ -1,0 +1,14 @@
+{
+    "outputs": [
+        {
+            "output": "bonjour",
+            "stats": {
+                "elapsed_time": 13,
+                "nb_characters": 5,
+                "nb_tokens": 1,
+                "nb_tus": 1,
+                "nb_tus_failed": 0
+            }
+        }
+    ]
+}
