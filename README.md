@@ -16,8 +16,8 @@ Using a command line tool, navigate to the root directory containing the 'pom.xm
 'mvn clean install'.
 This will run 4 runners (marked Runner{number}.java) in parallel.  
 Each runner runs a specified tag.  
-These tags can be found above the scenarios in the 'prime.number.page.feature' file.
-Details of the parallel running can be found in the 'pom.xml' file. 
+These tags can be found above the scenarios in the '*.feature' files.
+Details of the parallel running can be found in the failsafe plugin section of 'pom.xml' file. 
 
 # Run Tests for a Specified Environment
 
