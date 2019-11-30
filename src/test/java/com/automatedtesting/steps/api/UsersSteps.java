@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class UsersSteps extends APIBaseSteps implements En {
 
-    private static final String USERS = "users/";
+    private static final String USERS = "users";
 
     @Value("${mock.api.base.uri}")
     private String baseUri;
@@ -21,7 +21,7 @@ public class UsersSteps extends APIBaseSteps implements En {
         });
 
         When("^I call GET /users\\/(\\d+)$", (Integer id) -> {
-            request.basePath(USERS + id);
+            request.basePath(String.format("%s/%d", USERS, id));
             responseSupport.setResponse(request.when().get());
         });
 
@@ -36,23 +36,15 @@ public class UsersSteps extends APIBaseSteps implements En {
             responseSupport.setResponse(request.when().post());
         });
 
-        When("^I call PUT \\/users with a request body specified in \"(.+)\"$", (String filename) -> {
+        When("^I call POST \\/users with a request body specified in \"(.+)\"$", (String filename) -> {
             request.basePath(USERS);
-            String json = requestSupport.getRequestBodyFileContents(filename);
-            request.body(json);
-            responseSupport.setResponse(request.when().put());
-        });
-
-        When("^I call POST \\/users\\/(\\d+) with a request body specified in \"(.+)\"$", (Integer id,
-                                                                                         String filename) -> {
-            request.basePath(USERS + id);
             String json = requestSupport.getRequestBodyFileContents(filename);
             request.body(json);
             responseSupport.setResponse(request.when().post());
         });
 
         When("^I call DELETE \\/users\\/(\\d+)$", (Integer id) -> {
-            request.basePath(USERS + id);
+            request.basePath(String.format("%s/%d",USERS, id));
             responseSupport.setResponse(request.when().delete());
         });
     }

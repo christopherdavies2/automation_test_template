@@ -35,13 +35,9 @@ Feature: Users
     And the response matches the contents of the file specified in "users_response.json"
 
   Scenario: Add a user
-    When I call PUT /users with a request body specified in "user_request_body.json"
-    Then the response returns a HTTP status code of 201
-
-  Scenario: Update a user
-    When I call POST /users/999 with a request body specified in "user_request_body.json"
+    When I call POST /users with a request body specified in "user_request_body.json"
     Then the response returns a HTTP status code of 201
 
   Scenario: Delete a user
-    When I call DELETE /users/999
-    And the response returns a HTTP status code of 201
+    When I call DELETE /users/6
+    And the response returns a HTTP status code of 200
