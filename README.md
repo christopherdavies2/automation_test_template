@@ -5,13 +5,14 @@ A template for API and front end testing using Cucumber JVM.
 # Pre-requistes
 
 In order to run the tests you will need JDK 8 and Maven 3.6.1.
-You will need to download the Chrome and Gecko web drivers and place them in the src/test/resources/webdrivers/mac and 
-src/test/resources/webdrivers/windows folders.  This is so that this repo can be a git template as git will not accept 
+You will need to download the Chrome and Gecko web drivers and place them in the 'src/test/resources/webdrivers/mac' and 
+'src/test/resources/webdrivers/windows' folders.  This is so that this repo can be a git template as git will not accept 
 any files over 10mb in a template.
 
 # Run Tests
 
-In your favourite IDE run the file 'Default.java'.
+To run tests one at a time, run the file 'Default.java' in JUnit.  Tests will run 
+in the production environment by default as specified in the 'environment' property in 'common.properties'.  
 
 # Run Tests in Parallel
 
@@ -24,19 +25,31 @@ Details of the parallel running can be found in the failsafe plugin section of '
 
 # Run Tests for a Specified Environment
 
-In the 'common.properties' file change the value of the 'environment' property to be either 'local', 'production', 'stage' or 
-'uat'.
+In the 'common.properties' file change the value of the 'environment' property to be either 'local', 'production', 
+'stage' or 'uat'.
 This will then load the config from the relevant environment properties file marked '{environment}.properties'.
 Any property value in an '{environment}.properties' file will override its equivalent property value in 
 'common.properties'.
 
+When running via Maven you can specify the environment using the '-Denv' variable when running e.g. 'mvn clean install 
+-Denv=uat' to run the tests in the UAT environment.
+
 # Run Tests for a Specified Browser
 
-In the 'common.properties' file change the value of the 'browser' property to be either 'chrome', 'firefox' or 'edge'.
-You can also add a 'browser' property to one of the '{environment}.properties' files to run a specific browser for a particular 
-environment.
+In the 'common.properties' file change the value of the 'browser.name' property to be either 'chrome', 'firefox' or 
+'edge'.
+
+When running via Maven you can specify the browser using the '-Dbrowser' variable e.g. 'mvn clean install 
+-Dbrowser=firefox' to run the tests in Firefox.
 
 Please note that at time of writing (4/6/19) Edge is not currently supported on MacOS.
+
+# Run Tests Headless
+
+In the 'common.properties' file change the value of the 'browser.headless' property to be true.
+
+When running via Maven you can specify running headless by using the '-Dheadless' variable e.g. 'mvn clean install 
+-Dheadless=true'. 
 
 # Reporting
 

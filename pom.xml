@@ -25,7 +25,6 @@
         <jayway.json-path-assert.version>2.4.0</jayway.json-path-assert.version>
         <json.version>20180813</json.version>
         <rest-assured.version>4.0.0</rest-assured.version>
-        <assertj.version>3.11.1</assertj.version>
         <hamcrest.version>1.3</hamcrest.version>
         <cluecumber-report.version>1.11.0</cluecumber-report.version>
         <project.build.directory>target</project.build.directory>
