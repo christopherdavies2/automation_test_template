@@ -6,8 +6,9 @@ A template for API and front end testing using Cucumber JVM.
 
 In order to run the tests you will need JDK 8 and Maven 3.6.1.
 You will need to download the Chrome and Gecko web drivers and place them in the 'src/test/resources/webdrivers/mac' and 
-'src/test/resources/webdrivers/windows' folders.  This is so that this repo can be a git template as git will not accept 
-any files over 10mb in a template.
+'src/test/resources/webdrivers/windows' folders, you will also need to strip off the .exe extension from the webdriver 
+file.  
+The drivers have been left out of the repo as a git template can not have any files over 10mb in a template.
 
 # Run Tests
 
