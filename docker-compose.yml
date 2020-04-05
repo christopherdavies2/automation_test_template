@@ -1,2 +1,71 @@
-selenium/standalone-chrome
-selenium/standalone-firefox
+version: "3"
+
+services:
+  hub:
+    image: selenium/hub:3.141.59  #elgalu/selenium
+    networks:
+      - private
+    ports:
+      - 4444:4444
+      - 5900:5900
+
+    environment:
+      PORT: 4444
+      GRID_BROWSER_TIMEOUT: 300000
+      GRID_TIMEOUT: 300000
+      GRID_CLEAN_UP_CYCLE: 300000
+      GRID_UNREGISTER_IF_STILL_DOWN_AFTER: 300000
+      SE_OPTS: -browserTimeout 86400 -timeout 100
+
+  chrome:
+    image: selenium/node-chrome:3.141.59 #elgalu/selenium
+    networks:
+      - private
+    depends_on:
+      - hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      GRID_BROWSER_TIMEOUT: 300000
+      GRID_TIMEOUT: 300000
+      SCREEN_WIDTH: 1600
+      SCREEN_HEIGHT: 1200
+    volumes:
+      - /dev/shm:/dev/shm # Mitigates the Chromium issue described at https://code.google.com/p/chromium/issues/detail?id=519952
+
+
+  firefox:
+    image: selenium/node-firefox:3.141.59 #elgalu/selenium
+    networks:
+      - private
+    depends_on:
+      - hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      GRID_BROWSER_TIMEOUT: 300000
+      GRID_TIMEOUT: 300000
+      SCREEN_WIDTH: 1600
+      SCREEN_HEIGHT: 1200
+    volumes:
+      - /dev/shm:/dev/shm
+
+  tests:
+    image: automation_test_template
+    depends_on:
+      - chrome
+      - firefox
+      - hub
+    working_dir: /usr/share/wow
+    environment:
+      - BROWSER=chrome
+      - HUB_HOST=hub
+      - HUB_PORT:4444
+    volumes:
+      - /Users/vinodsiragaon/Documents/workspace/WOW-Automation-Web:/usr/share/wow
+      - ./output:/usr/share/wow/target/cucumber-reports
+
+
+  networks:
+    private:
+      driver: bridge
